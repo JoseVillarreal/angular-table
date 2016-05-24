@@ -4,6 +4,13 @@ app.controller('tableController', function ($scope, $http){
 
 	$scope.sortOrder = false;
 
+	//TODO  - Add fake user names instead of user ids
+	//		- Filter by user
+	//		- Search data
+	//		- Style
+	//		- NG Cloak properly
+	//		- fix project's readme
+
 	//generic sorting function for table columns
 	$scope.sortTable = function($col){
 		//check if sorting by same column

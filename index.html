@@ -3,10 +3,10 @@
 <head>
 	<title>Angular Table Example</title>
 </head>
-<body ng-app="angularTable" ng-init="loadData()">
+<body ng-app="angularTable" ng-controller="tableController" ng-init="loadData()">
 	<div class="wrapper">
 		<h1>Table Example</h1>
-		<table>
+		<table ng-cloak>
 			<caption>interview example in angular; data courtesy of <a href="http://jsonplaceholder.typicode.com/posts">jsonplaceholder</a></caption>
 			<thead>
 				<tr>
@@ -26,5 +26,5 @@
 	</div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="app.js" type="text/javascript" charset="utf-8" async defer></script>
+<script src="./app.js" type="text/javascript" charset="utf-8"></script>
 </html>
