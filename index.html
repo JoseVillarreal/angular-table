@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="viewport" content="width=device-width">
 	<title>Angular Table Example</title>
-	<link href='https://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Raleway:300,700' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="style.css">
 </head>
 <body ng-app="angularTable" ng-controller="tableController" ng-init="loadData()">
-	<div class="wrapper">
-		<h1>Table Example {{sortOption}}</h1> 
+	<div class="wrapper" ng-cloak>
+		<h1>Table Example</h1> 
 		<div class="table-wrapper">
+			<div class="search">
+				<input type="text" name="search" value="" placeholder="Search..." ng-model="searchValue">
+				<i class="fa fa-search" aria-hidden="true"></i>
+			</div>
+			<div class="userFilter">
+			Filter By User:
+				<select name="user_select" ng-model="userFilter">
+					<option value=""></option>
+					<option ng-repeat="u in users | orderBy: -u">{{u}}</option>
+				</select>
+			</div>
+			<p class="caption">example of a sortable table in angular; data courtesy of <a href="http://jsonplaceholder.typicode.com/posts">jsonplaceholder</a></p>
 			<table ng-cloak>
-				<caption>example of a sortable table in angular; data courtesy of <a href="http://jsonplaceholder.typicode.com/posts">jsonplaceholder</a></caption>
 				<thead>
 					<tr>
 						<th ng-click="sortTable('title')">Title <span ng-show="sortOption === 'title'"><i class="fa" ng-class="sortOrder ? 'fa-caret-down' : 'fa-caret-up'"></i></span></th>
@@ -20,7 +32,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="post in posts | orderBy:sortOption:sortOrder">
+					<tr ng-repeat="post in posts | filter: searchValue | filter:{userId: userFilter} | orderBy:sortOption:sortOrder">
 						<td>{{post.title}}</td>
 						<td>{{post.body}}</td>
 						<td>{{post.userId}}</td>

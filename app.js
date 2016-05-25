@@ -3,12 +3,8 @@ var app = angular.module('angularTable', []);
 app.controller('tableController', function ($scope, $http){
 
 	$scope.sortOrder = false;
-
-	//TODO  - Add fake user names instead of user ids
+	$scope.users = [];
 	//		- Filter by user
-	//		- Search data
-	//		- Style
-	//		- NG Cloak properly
 	//		- fix project's readme
 
 	//generic sorting function for table columns
@@ -30,7 +26,16 @@ app.controller('tableController', function ($scope, $http){
 	$scope.loadData = function(){
 		$http.get("http://jsonplaceholder.typicode.com/posts")
 		.then(function(response){
-			$scope.posts = response.data;
+			if ( response.data.length > 0 ){
+				$scope.posts = response.data;
+				var unique = {}
+				for (var i = $scope.posts.length - 1; i >= 0; i--) {
+					if (typeof(unique[$scope.posts[i].userId]) == "undefined"){
+						$scope.users.push($scope.posts[i].userId);
+					}
+					unique[$scope.posts[i].userId] = 0;
+				}
+			}
 		});
 	}
 });
