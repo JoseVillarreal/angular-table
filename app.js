@@ -12,16 +12,17 @@ app.controller('tableController', function ($scope, $http){
 	//		- fix project's readme
 
 	//generic sorting function for table columns
-	$scope.sortTable = function($col){
+	$scope.sortTable = function(col){
+		console.log(col);
 		//check if sorting by same column
-		if ( $col == $scope.sortOption){
+		if ( col === $scope.sortOption){
 			//we are, so let's just flip sort order
 			$scope.sortOrder = !$scope.sortOrder;
 		}
 		else{
 			//we're not, so let's reset sort order to base & change column we're sorting by
 			$scope.sortOrder = false;
-			$scope.sortOption = $col;	
+			$scope.sortOption = col;	
 		}
 	}
 
